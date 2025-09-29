@@ -15,9 +15,9 @@ def ask(question, options, correct):
             print("Zadej číslo 1–4.")
 
 def main():
-    print("=" * 40)
-    print("   🎬 VÍTEJ V MALÉM FILMOVÉM KVÍZU 🎬")
-    print("=" * 40)
+    print("=" * 35)
+    print("   VÍTEJ V MALÉM FILMOVÉM KVÍZU   ")
+    print("=" * 35)
 
     score = 0
     questions = [
@@ -39,21 +39,22 @@ def main():
 
     for q, opts, correct in questions:
         if ask(q, opts, correct):
-            print("✅ Správně!")
+            print("Správně!")
             score += 1
         else:
-            print("❌ Špatně!")
+            print("Špatně!")
 
     print("\n" + "=" * 40)
     print(f"Tvůj výsledek: {score}/{len(questions)} bodů")
 
     if score == 5:
-        print("🎉 Jsi filmový expert!")
+        print("Jsi filmový expert!")
     elif score >= 3:
-        print("🍿 Dobrá práce, ale je co dohánět.")
+        print("Dobrá práce, ale je co dohánět.")
     else:
-        print("😅 Asi radši koukej na víc filmů!")
+        print("Asi radši koukej na víc filmů!")
     print("=" * 40)
 
 if __name__ == "__main__":
     main()
+

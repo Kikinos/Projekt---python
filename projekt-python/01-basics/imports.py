@@ -75,3 +75,20 @@ Použijte vhodné moduly v Pythonu (včetně jejich případné instalace) k tom
 K řešení prvního úkolu je možné doporučit importovat interní modul datetime
 Řešení dalších dvou úkolů můžete odvodit z příkladů v dokumentaci k externímu modulu dateutil - viz https://pypi.org/project/python-dateutil/
 """
+#1)
+from datetime import *
+now = datetime.now()
+print("Aktuální datum a čas:", now.strftime("%d.%m.%Y %H:%M:%S"))
+
+#2)
+from dateutil.easter import easter
+from dateutil.relativedelta import *
+from dateutil.rrule import *
+
+for i in range(1, 6):
+    velikonocni_nedele = easter(now.year + i)
+    print(f"Velikonoční neděle v roce {now.year + i} připadá na: {velikonocni_nedele.strftime('%d.%m.%Y')}")
+
+#3)
+year = rrule(YEARLY,dtstart=now,bymonth=12,bymonthday=24,byweekday=SU)[0].year
+print(f"Nejbližší rok, kdy bude Štědrý den v neděli, je: {year}")

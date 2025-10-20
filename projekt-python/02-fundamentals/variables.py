@@ -29,9 +29,16 @@ Některé objekty mohou mít explicitně přiřazené jméno, obecně označovan
 
 '''Úkol A'''
 #? Najděte na Internetu, jakými funkcemi lze v Pythonu zjistit
-#? a) typ objektu
-#? b) identitu objektu (jeho adresu v paměti)
+#? a) typ objektu - type()
+#? b) identitu objektu (jeho adresu v paměti) - id()
 #? Ukažte to na příkladech proměnných students_count, rating, is_published a vypište výstupy do konzole
+
+print("Typ proměnné students_count:", type(students_count))
+print("ID proměnné students_count:", id(students_count))
+print("Typ proměnné rating:", type(rating))
+print("ID proměnné rating:", id(rating))
+print("Typ proměnné is_published:", type(is_published))
+print("ID proměnné is_published:", id(is_published))
 
 # Numerické operátory
 # print(10 + 3)
@@ -72,6 +79,34 @@ hexadecimal = 0x12c #Hexadecimal Literal
 #? Pro toto binární číslo proveďte nejprve bitový posun o 2 bity vpravo, poté vypište výsledek v desítkové soustavě
 #? Proveďte bitový součin hexadecimálního čísla "1A" a vašeho binárního čísla a opět vypište v desítkové soustavě
 #? Výsledek zobrazte jako formátovaný řetězec - např. "Binární součin čísla 0b11010 a 0b10110101 je 0b10000"
+
+#1):
+'''
+&  – AND
+|  – OR
+^  – XOR
+~  – NOT
+<< – posun bitů doleva
+>> – posun bitů doprava
+'''
+
+#2):
+myself = 0b110110110
+
+#3):
+decimal_value = int(myself)
+print(f"Binární číslo {bin(myself)} v desítkové soustavě je {decimal_value}")
+
+#4):
+shifted = myself >> 2
+print(f"Po posunu o 2 bity vpravo: {bin(shifted)} ({shifted})")
+
+#5):
+hex_value = 0x1A
+sum = myself & hex_value
+
+#6):
+print(f"Binární součin čísla {bin(myself)} a {bin(hex_value)} je {bin(sum)} ({sum})")
 
 
 '''Python plně podporuje operace v plovoucí řádové čárce (tj. desetinná čísla). 
@@ -138,5 +173,3 @@ Speciální proměnná _ reprezentuje předešlý výsledek.
 Varování: Hodnota proměnné _ by nikdy neměla být modifikována uživatelem. 
 Pokud byste jí přiřadili hodnotu, vytvořili byste nezávislou lokální proměnnou se stejným jménem, 
 která by zakryla interní proměnnou s tímto chováním.'''
-
-

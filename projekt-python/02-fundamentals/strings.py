@@ -158,3 +158,67 @@ funkční kód, tím lepší).
 3. Vytvořte funkci, která vygeneruje náhodná hesla pro počet osob zadaný v parametru tak, aby heslo začínalo
    3 velkými písmeny, pokračovalo 3 malými písmeny, jedním speciálním znakem (-/+*) a končilo 3 náhodnými číslicemi.
 '''
+
+def cz_date_to_db(date_str: str) -> str:
+   """Převede datum z formátu 'DD. MM. YYYY' (mezery a oddělovače volitelné) na 'YYYY-MM-DD'.
+   Příklad: '12. 10. 2020' -> '2020-10-12'
+   """
+   m = re.match(r'^\s*(\d{1,2})\s*[.\-/]\s*(\d{1,2})\s*[.\-/]\s*(\d{2,4})\s*$', date_str)
+   if not m:
+      raise ValueError("Neplatný formát data")
+   day, month, year = map(int, m.groups())
+   if year < 100:
+      year += 2000
+   if not (1 <= month <= 12 and 1 <= day <= 31):
+      raise ValueError("Neplatný den nebo měsíc")
+   return f"{year:04d}-{month:02d}-{day:02d}"
+print(cz_date_to_db("12. 10. 2020"))
+
+import re, unicodedata
+import random
+import string
+
+def make_identifier(text: str, style: str = "snake") -> str:
+    """Vytvoří identifikátor ve stylu snake_case, camelCase."""
+
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+
+    words = re.findall(r"[A-Za-z0-9]+", text)
+    if not words:
+        return ""
+
+    style = style.lower()
+    if style == "snake":
+        ident = "_".join(w.lower() for w in words)
+    elif style == "camel":
+        ident = words[0].lower() + "".join(w.capitalize() for w in words[1:])
+    else:
+        raise ValueError(f"Neznámý styl: {style}")
+
+    return ident
+
+print(make_identifier("To je proměnná v Pythonu", "snake"))
+print(make_identifier("To je proměnná v Pythonu", "camel"))
+
+def generate_passwords(count: int) -> list:
+   """Vygeneruje náhodná hesla pro zadaný počet osob.
+   Formát hesla: 3 velká písmena + 3 malá písmena + 1 speciální znak (-/+*) + 3 číslice
+   """
+   passwords = []
+   special_chars = "-/+*"
+   
+   for _ in range(count):
+      password = (
+         ''.join(random.choices(string.ascii_uppercase, k=3)) +
+         ''.join(random.choices(string.ascii_lowercase, k=3)) +
+         random.choice(special_chars) +
+         ''.join(random.choices(string.digits, k=3))
+      )
+      passwords.append(password)
+   
+   return passwords
+
+passwords = generate_passwords(5)
+for i, password in enumerate(passwords, 1):
+   print(f"Osoba {i}: {password}")
